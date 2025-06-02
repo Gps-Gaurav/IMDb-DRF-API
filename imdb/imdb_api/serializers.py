@@ -1,13 +1,14 @@
 from rest_framework import serializers
 from .models import  WatchList, StreamPlatform
-
-
+ 
+# model based serializers
 class WatchListSerializer(serializers.ModelSerializer):
     class Meta:
         model = WatchList
         fields = '__all__'
     # fields = ['id', 'title', 'storyline', 'platform', 'active', 'created_at', 'updated_at']
 
+# non-model based serializers
 
 # class WatchListSerializer(serializers.Serializer):
 #     id = serializers.IntegerField(read_only=True)
@@ -29,11 +30,13 @@ class WatchListSerializer(serializers.ModelSerializer):
 #         instance.save()
 #         return instance
     
+# # model based serializers
 class StreamPlatformSerializer(serializers.ModelSerializer):
     class Meta:
         model = StreamPlatform
         fields = '__all__'
     
+# non-model based serializers
 
 # class StreamPlatformSerializer(serializers.Serializer):
 #     id = serializers.IntegerField(read_only=True)
