@@ -12,6 +12,7 @@ from rest_framework import mixins
 from rest_framework import generics
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
+from rest_framework import viewsets
 # Create your views here.
 #  using generic class
 
@@ -21,16 +22,28 @@ def api_root(request, format=None):
         'watchlist': reverse('movie_list', request=request, format=format),
         'streamplatforms': reverse('stream_list', request=request, format=format)
     })
-class StreamPlatformList(generics.ListCreateAPIView):
+    
+
+class streamPlatformViewset(viewsets.ModelViewSet):
+    """
+    This ViewSet automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions.
+
+    Additionally we also provide an extra `highlight` action.
+    """
     queryset = StreamPlatform.objects.all()
     serializer_class = StreamPlatformSerializer
+    
+# class StreamPlatformList(generics.ListCreateAPIView):
+#     queryset = StreamPlatform.objects.all()
+#     serializer_class = StreamPlatformSerializer
 
-    def perform_create(self, serializer):
-        serializer.save()  # You can add custom logic here if needed
+#     def perform_create(self, serializer):
+#         serializer.save()  # You can add custom logic here if needed
 
-class StreamPlatformDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = StreamPlatform.objects.all()
-    serializer_class = StreamPlatformSerializer
+# class StreamPlatformDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = StreamPlatform.objects.all()
+#     serializer_class = StreamPlatformSerializer
 
 
 # #using mixins
