@@ -12,29 +12,43 @@ from rest_framework import mixins
 from rest_framework import generics
 
 # Create your views here.
+#  using generic class
+
+class StreamPlatformList(generics.ListCreateAPIView):
+    queryset = StreamPlatform.objects.all()
+    serializer_class = StreamPlatformSerializer
+
+    def perform_create(self, serializer):
+        serializer.save()  # You can add custom logic here if needed
+
+class StreamPlatformDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = StreamPlatform.objects.all()
+    serializer_class = StreamPlatformSerializer
+
+
 # #using mixins
 
-class StreamPlatformList(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,
-                    mixins.DestroyModelMixin,generics.GenericAPIView):
-    queryset = StreamPlatform.objects.all()
-    serializer_class = StreamPlatformSerializer
+# class StreamPlatformList(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,
+#                     mixins.DestroyModelMixin,generics.GenericAPIView):
+#     queryset = StreamPlatform.objects.all()
+#     serializer_class = StreamPlatformSerializer
     
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+#     def get(self, request, *args, **kwargs):
+#         return self.list(request, *args, **kwargs)
+#     def post(self, request, *args, **kwargs):
+#         return self.create(request, *args, **kwargs)
     
-class StreamPlatformDetail(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,
-                    mixins.DestroyModelMixin,generics.GenericAPIView):
-    queryset = StreamPlatform.objects.all()
-    serializer_class = StreamPlatformSerializer
-    lookup_field = 'pk'
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
+# class StreamPlatformDetail(mixins.RetrieveModelMixin,mixins.UpdateModelMixin,
+#                     mixins.DestroyModelMixin,generics.GenericAPIView):
+#     queryset = StreamPlatform.objects.all()
+#     serializer_class = StreamPlatformSerializer
+#     lookup_field = 'pk'
+#     def get(self, request, *args, **kwargs):
+#         return self.retrieve(request, *args, **kwargs)
+#     def put(self, request, *args, **kwargs):
+#         return self.update(request, *args, **kwargs)
+#     def delete(self, request, *args, **kwargs):
+#         return self.destroy(request, *args, **kwargs)
     
 # # using generic views
 # # class based views
