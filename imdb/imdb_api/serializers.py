@@ -1,25 +1,33 @@
 from rest_framework import serializers
 from .models import  WatchList, StreamPlatform
 
-class WatchListSerializer(serializers.Serializer):
-    id = serializers.IntegerField(read_only=True)
-    title = serializers.CharField(max_length=100)
-    storyline = serializers.CharField(max_length=255)
-    # platform = models.ForeignKey(StreamPlatform, on_delete=models.CASCADE, related_name='watchlist')
-    active = serializers.BooleanField(default=True)
-    created_at = serializers.DateTimeField(read_only=True)
-    updated_at = serializers.DateTimeField(read_only=True)
+
+class WatchListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WatchList
+        fields = '__all__'
+    # fields = ['id', 'title', 'storyline', 'platform', 'active', 'created_at', 'updated_at']
+
+
+# class WatchListSerializer(serializers.Serializer):
+#     id = serializers.IntegerField(read_only=True)
+#     title = serializers.CharField(max_length=100)
+#     storyline = serializers.CharField(max_length=255)
+#     # platform = models.ForeignKey(StreamPlatform, on_delete=models.CASCADE, related_name='watchlist')
+#     active = serializers.BooleanField(default=True)
+#     created_at = serializers.DateTimeField(read_only=True)
+#     updated_at = serializers.DateTimeField(read_only=True)
     
-    def create(self, validated_data):
-        return WatchList.objects.create(**validated_data)
+#     def create(self, validated_data):
+#         return WatchList.objects.create(**validated_data)
     
-    def update(self, instance, validated_data):
-        instance.title = validated_data.get('title', instance.title)
-        instance.storyline = validated_data.get('storyline', instance.storyline)
-        instance.active = validated_data.get('active', instance.active)
-        instance.created_at = validated_data.get('created_at', instance.created_at)
-        instance.save()
-        return instance
+#     def update(self, instance, validated_data):
+#         instance.title = validated_data.get('title', instance.title)
+#         instance.storyline = validated_data.get('storyline', instance.storyline)
+#         instance.active = validated_data.get('active', instance.active)
+#         instance.created_at = validated_data.get('created_at', instance.created_at)
+#         instance.save()
+#         return instance
     
 class StreamPlatformSerializer(serializers.ModelSerializer):
     class Meta:
