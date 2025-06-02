@@ -3,10 +3,10 @@ from . import views
 from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
-    # path('list/', views.movie_list, name='movie_list'),
-    # path('list/<int:pk>', views.movie_detail, name='movie_detail'),
-    path('stream', views.StreamPlatformList.as_view(), name='stream_list'),
-    path('stream/<int:pk>', views.StreamPlatformDetail.as_view(), name='stream_detail')
-    
+    path('list/', views.movie_list, name='watchlist-list'),
+    path('list/<int:pk>', views.movie_detail, name='watchlist-detail'),
+    path('stream', views.StreamPlatformList.as_view(), name='streamplatform-list'),
+    path('stream/<int:pk>', views.StreamPlatformDetail.as_view(), name='streamplatform-detail'),
+    path('', views.api_root, name='api_root'),
 ]
 urlpatterns = format_suffix_patterns(urlpatterns)

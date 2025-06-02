@@ -10,10 +10,17 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework import mixins
 from rest_framework import generics
-
+from rest_framework.reverse import reverse
+from rest_framework.response import Response
 # Create your views here.
 #  using generic class
 
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'watchlist': reverse('movie_list', request=request, format=format),
+        'streamplatforms': reverse('stream_list', request=request, format=format)
+    })
 class StreamPlatformList(generics.ListCreateAPIView):
     queryset = StreamPlatform.objects.all()
     serializer_class = StreamPlatformSerializer
@@ -105,15 +112,17 @@ class StreamPlatformDetail(generics.RetrieveUpdateDestroyAPIView):
 
 # # function based views
 
-# def movie_list(_):
-#     movie_list = WatchList.objects.all()
-#     serialized = WatchListSerializer(movie_list, many=True)
-#     return JsonResponse(serialized.data, safe=False)
+@api_view(['GET'])
+def movie_list(_):
+    movie_list = WatchList.objects.all()
+    serialized = WatchListSerializer(movie_list, many=True)
+    return Response(serialized.data)
 
-# def movie_detail(_, pk):
-#     movie = WatchList.objects.get(pk=pk)
-#     serialized = WatchListSerializer(movie)
-#     return JsonResponse(serialized.data, safe=False)
+@api_view(['GET'])
+def movie_detail(_, pk):
+    movie = WatchList.objects.get(pk=pk)
+    serialized = WatchListSerializer(movie)
+    return Response(serialized.data)
 
 # @api_view(['GET', 'POST'])
 # def stream_list(request, format = None):

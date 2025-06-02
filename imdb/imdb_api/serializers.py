@@ -31,11 +31,18 @@ class WatchListSerializer(serializers.ModelSerializer):
 #         return instance
     
 # # model based serializers
-class StreamPlatformSerializer(serializers.ModelSerializer):
+# class StreamPlatformSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = StreamPlatform
+#         fields = '__all__'
+# # usinng hyperlink
+class StreamPlatformSerializer(serializers.HyperlinkedModelSerializer):
+    
+    # link = serializers.HyperlinkedIdentityField(view_name='streamplatform-detail', format='html' )
     class Meta:
         model = StreamPlatform
         fields = '__all__'
-    
+   
 # non-model based serializers
 
 # class StreamPlatformSerializer(serializers.Serializer):
