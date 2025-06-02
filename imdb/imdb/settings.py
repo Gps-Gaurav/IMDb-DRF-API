@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'imdb_api'
+    'imdb_api',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
