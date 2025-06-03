@@ -37,7 +37,9 @@ class WatchListSerializer(serializers.ModelSerializer):
 #         fields = '__all__'
 # # usinng hyperlink
 class StreamPlatformSerializer(serializers.HyperlinkedModelSerializer):
-    
+    watchList= WatchListSerializer(many=True, read_only=True)
+    # watchList = serializers.HyperlinkedRelatedField(many=True, read_only=True, view_name='watchlist-detail', lookup_field='pk')
+    # watchlist = serializers.StringRelatedField( many=True, read_only=True)
     # link = serializers.HyperlinkedIdentityField(view_name='streamplatform-detail', format='html' )
     class Meta:
         model = StreamPlatform
