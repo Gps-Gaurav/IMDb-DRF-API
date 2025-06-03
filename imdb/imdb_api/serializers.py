@@ -44,6 +44,24 @@ class StreamPlatformSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = StreamPlatform
         fields = '__all__'
+        
+    
+    def validate_name(self, value):
+        if len(value) <= 2:
+            raise serializers.ValidationError("Name must be at least 2 characters long.")
+        return value
+    
+    # object level validation
+    def validate(self, data):
+        if data['name'] == data['about']:
+            raise serializers.ValidationError("Name and About cannot be the same.")
+        return data
+    
+    # function based validation
+    
+#    
+    # for serializers.Serializer
+     
    
 # non-model based serializers
 
