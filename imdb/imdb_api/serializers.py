@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import  WatchList, StreamPlatform
+from .models import  WatchList, StreamPlatform, reviews
  
 # model based serializers
 class WatchListSerializer(serializers.ModelSerializer):
@@ -81,3 +81,18 @@ class StreamPlatformSerializer(serializers.HyperlinkedModelSerializer):
 #         instance.save()
 #         return instance
     
+class ReviewSerializer(serializers.ModelSerializer):
+    watchlist = serializers.HyperlinkedRelatedField(
+        many=False,
+        read_only=True,
+        view_name='watchlist-detail',
+        lookup_field='pk'
+    )
+    class Meta:
+        model = reviews
+        fields = '__all__'
+    # fields = ['id', 'rating', 'desc', 'watchlist', 'active', 'created_at', 'updated_at']   
+    def validate_rating(self, value):
+        if value < 1 or value > 10:
+            raise serializers.ValidationError("Rating must be between 1 and 10.")
+        return value

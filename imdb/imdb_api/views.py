@@ -1,8 +1,8 @@
 from django.http import HttpResponse, JsonResponse
 from django.http import Http404
 
-from .models import WatchList, StreamPlatform
-from .serializers import WatchListSerializer, StreamPlatformSerializer
+from .models import WatchList, StreamPlatform, reviews
+from .serializers import WatchListSerializer, StreamPlatformSerializer, ReviewSerializer
 
 from rest_framework.response import Response
 from rest_framework import status
@@ -33,6 +33,22 @@ class streamPlatformViewset(viewsets.ModelViewSet):
     """
     queryset = StreamPlatform.objects.all()
     serializer_class = StreamPlatformSerializer
+    
+class review_list(generics.ListCreateAPIView):
+    """
+    This ViewSet automatically provides `list` and `create` actions.
+    """
+    queryset = reviews.objects.all()
+    serializer_class = ReviewSerializer
+    
+
+class review_detail( generics.RetrieveUpdateDestroyAPIView):
+    """
+    This ViewSet automatically provides `retrieve`, `update` and `destroy` actions.
+    """
+    queryset = reviews.objects.all()
+    serializer_class = ReviewSerializer
+            
     
 # class StreamPlatformList(generics.ListCreateAPIView):
 #     queryset = StreamPlatform.objects.all()
