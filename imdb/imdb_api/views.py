@@ -34,20 +34,34 @@ class streamPlatformViewset(viewsets.ModelViewSet):
     queryset = StreamPlatform.objects.all()
     serializer_class = StreamPlatformSerializer
     
-class review_list(generics.ListCreateAPIView):
+class review_create(generics.CreateAPIView):
     """
-    This ViewSet automatically provides `list` and `create` actions.
+    This ViewSet automatically provides `create` actions.
     """
     queryset = reviews.objects.all()
     serializer_class = ReviewSerializer
     
-
+    def perform_create(self, serializer):
+        pk = self.kwargs.get('pk')
+        movie = WatchList.objects.get(pk=pk)
+        serializer.save(watchlist=movie)    
+    
+class review_list(generics.ListAPIView):
+    """
+    This ViewSet automatically provides `list` and `create` actions.
+    """
+    serializer_class = ReviewSerializer
+    
+    def get_queryset(self):
+        pk = self.kwargs.get('pk')
+        return reviews.objects.filter(watchlist=pk)
 class review_detail( generics.RetrieveUpdateDestroyAPIView):
     """
     This ViewSet automatically provides `retrieve`, `update` and `destroy` actions.
     """
     queryset = reviews.objects.all()
     serializer_class = ReviewSerializer
+# # using generic class based views
             
     
 # class StreamPlatformList(generics.ListCreateAPIView):

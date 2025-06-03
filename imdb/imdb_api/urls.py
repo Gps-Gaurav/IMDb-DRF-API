@@ -22,8 +22,11 @@ router.register(r'stream', views.streamPlatformViewset, basename='streamplatform
 urlpatterns = [
     path('list/', views.movie_list, name='watchlist-list'),
     path('list/<int:pk>', views.movie_detail, name='watchlist-detail'),
-    path('reviews/', views.review_list.as_view(), name='review-list'),
-    path('reviews/<int:pk>', views.review_detail.as_view(), name='review-detail'),
+    # path('reviews/', views.review_list.as_view(), name='review-list'),
+    # path('reviews/<int:pk>', views.review_detail.as_view(), name='review-detail'),
+    path('list/<int:pk>/reviews/', views.review_list.as_view(), name='review-list'),
+    path('list/<int:pk>/review-create/', views.review_create.as_view(), name='review-create'),
+    path('list/review/<int:pk>/',views.review_detail.as_view(), name='review-detail'),
     path('stream/', include(router.urls)),
     
     # path('stream',stream_platform_list, name='streamplatform-list'),

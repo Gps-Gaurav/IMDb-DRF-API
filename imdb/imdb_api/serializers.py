@@ -82,15 +82,12 @@ class StreamPlatformSerializer(serializers.HyperlinkedModelSerializer):
 #         return instance
     
 class ReviewSerializer(serializers.ModelSerializer):
-    watchlist = serializers.HyperlinkedRelatedField(
-        many=False,
-        read_only=True,
-        view_name='watchlist-detail',
-        lookup_field='pk'
-    )
+    review_user = serializers.StringRelatedField(read_only=True)
+   
     class Meta:
         model = reviews
         fields = '__all__'
+   
     # fields = ['id', 'rating', 'desc', 'watchlist', 'active', 'created_at', 'updated_at']   
     def validate_rating(self, value):
         if value < 1 or value > 10:
