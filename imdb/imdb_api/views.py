@@ -54,8 +54,15 @@ class review_create(generics.CreateAPIView):
         review_queryset = reviews.objects.filter(watchlist=movie, review_user=review_user)
         if review_queryset.exists():
             raise serializers.ValidationError("You have already reviewed this movie.")
-             
-        serializer.save(watchlist=movie)    
+        
+        if movie.no_of_ratings == 0:
+            movie.av_rating = serializer.validated_data['rating']
+        else:
+            movie.av_rating = (movie.av_rating + serializer.validated_data['rating']) / 2
+        movie.no_of_ratings += 1
+        movie.save()
+        
+        serializer.save(watchlist=movie, review_user=review_user)    
     
 class review_list(generics.ListAPIView):
     """
