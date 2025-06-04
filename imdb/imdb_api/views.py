@@ -10,6 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework import mixins
 from rest_framework import generics
+from rest_framework import serializers
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from rest_framework import viewsets
@@ -44,6 +45,11 @@ class review_create(generics.CreateAPIView):
     def perform_create(self, serializer):
         pk = self.kwargs.get('pk')
         movie = WatchList.objects.get(pk=pk)
+        review_user= self.request.user
+        review_queryset = reviews.objects.filter(watchlist=movie, review_user=review_user)
+        if review_queryset.exists():
+            raise serializers.ValidationError("You have already reviewed this movie.")
+             
         serializer.save(watchlist=movie)    
     
 class review_list(generics.ListAPIView):
