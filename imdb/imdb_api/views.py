@@ -1,8 +1,11 @@
 from django.http import HttpResponse, JsonResponse
 from django.http import Http404
 
+
 from .models import WatchList, StreamPlatform, reviews
 from .serializers import WatchListSerializer, StreamPlatformSerializer, ReviewSerializer
+from .permissions import AdminOrReadOnly, ReviewUserOrReadOnly
+
 
 from rest_framework.response import Response
 from rest_framework import status
@@ -14,7 +17,7 @@ from rest_framework import serializers
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from rest_framework import viewsets
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly, IsAuthenticated
 # Create your views here.
 #  using generic class
 
@@ -40,6 +43,7 @@ class review_create(generics.CreateAPIView):
     """
     This ViewSet automatically provides `create` actions.
     """
+    # permission_classes = [ReviewUserOrReadOnly]
     queryset = reviews.objects.all()
     serializer_class = ReviewSerializer
     
@@ -68,7 +72,8 @@ class review_detail( generics.RetrieveUpdateDestroyAPIView):
     """
     This ViewSet automatically provides `retrieve`, `update` and `destroy` actions.
     """
-    permission_classes = [IsAdminUser]
+    permission_classes = [ReviewUserOrReadOnly]
+    # permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = reviews.objects.all()
     serializer_class = ReviewSerializer
 # # using generic class based views
