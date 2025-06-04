@@ -14,6 +14,7 @@ from rest_framework import serializers
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
 from rest_framework import viewsets
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 # Create your views here.
 #  using generic class
 
@@ -56,6 +57,8 @@ class review_list(generics.ListAPIView):
     """
     This ViewSet automatically provides `list` and `create` actions.
     """
+    permission_classes = [IsAuthenticated]
+    queryset = reviews.objects.all()
     serializer_class = ReviewSerializer
     
     def get_queryset(self):
@@ -65,6 +68,7 @@ class review_detail( generics.RetrieveUpdateDestroyAPIView):
     """
     This ViewSet automatically provides `retrieve`, `update` and `destroy` actions.
     """
+    permission_classes = [IsAdminUser]
     queryset = reviews.objects.all()
     serializer_class = ReviewSerializer
 # # using generic class based views
