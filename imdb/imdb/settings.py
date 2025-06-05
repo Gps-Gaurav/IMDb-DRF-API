@@ -131,3 +131,8 @@ REST_FRAMEWORK = {
     ]
 }
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://imdb-drf-api.onrender.com',
+    'https://www.imdb-drf-api.onrender.com',
+]
