@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['imdb-drf-api.onrender.com', '0.0.0.0', '127.0.0.1', 'localhost
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,7 +42,7 @@ INSTALLED_APPS = [
     'imdb_api',
     'rest_framework',
     'drf_yasg',
-    'corsheaders',
+    
 ]
 
 MIDDLEWARE = [
