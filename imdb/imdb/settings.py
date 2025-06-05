@@ -41,9 +41,11 @@ INSTALLED_APPS = [
     'imdb_api',
     'rest_framework',
     'drf_yasg',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -135,4 +137,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = [
     'https://imdb-drf-api.onrender.com',
     'https://www.imdb-drf-api.onrender.com',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "https://imdb-drf-api.onrender.com",
 ]

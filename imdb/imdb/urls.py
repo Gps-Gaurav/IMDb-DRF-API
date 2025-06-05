@@ -17,7 +17,8 @@ schema_view = get_schema_view(
         default_version='v1',
         description="API for IMDB clone",
     ),
-    public=True
+    public=True,
+    url="https://imdb-drf-api.onrender.com/api/swagger/schema",
 )
 
 urlpatterns = [
