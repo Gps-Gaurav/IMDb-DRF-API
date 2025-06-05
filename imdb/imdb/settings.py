@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-5r0&7cf0&1=!hr2!+-^=#_@kn4az+_j(zx@j9q%_2(y4o4hgo@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['imdb-drf-api.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['imdb-drf-api.onrender.com', '0.0.0.0', '127.0.0.1', 'localhost']
+
 
 
 # Application definition

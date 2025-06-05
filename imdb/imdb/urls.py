@@ -4,6 +4,11 @@ from django.urls import path, include
 
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("API is running on Render!")
+
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -14,6 +19,7 @@ schema_view = get_schema_view(
     public=True
 )
 urlpatterns = [
+    path('', home, name='home'),
     path('admin/', admin.site.urls),
     path('api/',
          include([
