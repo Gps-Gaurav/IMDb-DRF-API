@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'imdb_api',
     'rest_framework',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
