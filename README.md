@@ -6,6 +6,8 @@ basic to advanced REST API by using python DRF
 
 https://imdb-drf-api.onrender.com/swagger/
 
+⚠️ Note: Since this backend is hosted on Render's free tier, the server may take up to 50 seconds to wake up after inactivity. You might encounter a temporary connection error — please wait and try again.
+
 ## Features
 
 - Create, Read, Update and Delete Movies and Movie Reviews
